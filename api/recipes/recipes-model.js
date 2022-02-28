@@ -15,6 +15,11 @@ async function add(recipe) {
 	return newRecipe;
 };
 
+async function update(recipe_id, updates) {
+	const updatedRecipe = await db('recipes').where({ recipe_id }).update(updates);
+	return getById(updatedRecipe);
+}
+
 async function remove(recipe_id) {
 	const recipe = await getById(recipe_id);
 	await db('recipes').where({ recipe_id }).del();
@@ -26,5 +31,6 @@ module.exports = {
 	get,
 	getById,
 	add,
+	update,
 	remove
 };

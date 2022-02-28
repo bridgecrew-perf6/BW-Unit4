@@ -56,5 +56,6 @@ exports.down = async (knex) => {
     .dropTableIfExists('ingredients')
     .dropTableIfExists('steps')
     .dropTableIfExists('recipes')
+    .dropTableIfExists('categories')
     .dropTableIfExists('users');
 }
