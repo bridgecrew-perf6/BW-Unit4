@@ -6,18 +6,25 @@ async function get() {
 	return db('recipes');
 };
 
-async function getById(recipe_id) {
+function getById(recipe_id) {
 	return db('recipes').where({ recipe_id }).first();
 };
 
 async function add(recipe) {
-	const [id] = await db('recipes').insert(recipe);
-	return getById(id);
+	const [newRecipe] = await db('recipes').insert(recipe, ['recipe_id', 'recipe_name']);
+	return newRecipe;
+};
+
+async function remove(recipe_id) {
+	const recipe = await getById(recipe_id);
+	await db('recipes').where({ recipe_id }).del();
+	return recipe;
 };
 
 // Exports
 module.exports = {
 	get,
 	getById,
-	add
+	add,
+	remove
 };

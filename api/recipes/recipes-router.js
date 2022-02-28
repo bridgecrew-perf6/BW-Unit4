@@ -27,5 +27,13 @@ router.post('/', (req, res, next) => {
 		.catch(next);
 });
 
+router.delete('/:id', (req, res, next) => {
+	Recipes.remove(req.params.id)
+		.then(recipe => {
+			res.json(recipe);
+		})
+		.catch(next);
+});
+
 // Exports
 module.exports = router;
