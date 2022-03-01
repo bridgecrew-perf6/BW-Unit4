@@ -11,7 +11,7 @@
     "rollback:prod": "heroku run knex migrate:rollback -a bw-unit4-recipes",
     "database:prod": "heroku pg:psql -a bw-unit4-recipes",
     "seed:prod": "heroku run knex seed:run -a bw-unit4-recipes",
-    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
+    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --watch",
     "deploy": "git push heroku main"
   },
   "engines": {
