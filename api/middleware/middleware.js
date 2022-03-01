@@ -1,7 +1,7 @@
 // Imports
-const Users = require('./users-model');
+const Users = require('../users/users-model');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('./secrets');
+const { JWT_SECRET } = require('../users/secrets');
 
 // Middleware
 const checkUser = async (req, res, next) => {

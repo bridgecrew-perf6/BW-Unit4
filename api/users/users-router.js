@@ -1,7 +1,7 @@
 // Imports
 const router = require('express').Router();
 const Users = require('../users/users-model');
-const { checkUser, restricted } = require('./users-middleware');
+const { checkUser, restricted } = require('../middleware/middleware');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../users/secrets');

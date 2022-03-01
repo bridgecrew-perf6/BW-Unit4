@@ -1,9 +1,10 @@
 // Imports
 const router = require('express').Router();
 const Recipes = require('./recipes-model');
+const { restricted } = require('../middleware/middleware');
 
 // Endpoints
-router.get('/', (req, res, next) => {
+router.get('/', restricted, (req, res, next) => {
 	Recipes.get()
 		.then(recipes => {
 			res.json(recipes);
@@ -11,7 +12,7 @@ router.get('/', (req, res, next) => {
 		.catch(next);
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', restricted, (req, res, next) => {
 	Recipes.getById(req.params.id)
 		.then(recipe => {
 			res.json(recipe);
@@ -19,7 +20,7 @@ router.get('/:id', (req, res, next) => {
 		.catch(next);
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', restricted, (req, res, next) => {
 	Recipes.add(req.body)
 		.then(recipe => {
 			res.status(201).json(recipe);
@@ -27,7 +28,7 @@ router.post('/', (req, res, next) => {
 		.catch(next);
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', restricted, (req, res, next) => {
 	Recipes.update(req.params.id, req.body)
 		.then(recipe => {
 			res.json(recipe);
@@ -35,7 +36,7 @@ router.put('/:id', (req, res, next) => {
 		.catch(next);
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', restricted, (req, res, next) => {
 	Recipes.remove(req.params.id)
 		.then(recipe => {
 			res.json(recipe);
