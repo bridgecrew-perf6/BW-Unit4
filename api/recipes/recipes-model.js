@@ -3,7 +3,16 @@ const db = require('../data/db-config');
 
 // Data Access Models
 async function get() {
-	return db('recipes');
+	const getRecipes = await db('recipes');
+
+	const recipes = [];
+
+	for (let r of getRecipes) {
+		const recipe = await getById(r.recipe_id);
+		recipes.push(recipe);
+	}
+
+	return recipes;
 };
 
 async function getById(recipe_id) {
@@ -23,7 +32,7 @@ async function getById(recipe_id) {
 		recipe_title: getIngredients[0].recipe_title,
 		recipe_source: getIngredients[0].recipe_source,
 		ingredients: [],
-		steps: []
+		instructions: []
 	};
 
 	for (let i of getIngredients) {
@@ -35,7 +44,7 @@ async function getById(recipe_id) {
 	}
 	
 	for (let s of getSteps) {
-		recipe.steps.push({
+		recipe.instructions.push({
 			step_id: s.step_id,
 			step_number: s.step_number,
 			step_instructions: s.step_instructions
