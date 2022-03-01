@@ -16,8 +16,8 @@ async function add(recipe) {
 };
 
 async function update(recipe_id, updates) {
-	const updatedRecipe = await db('recipes').where({ recipe_id }).update(updates);
-	return getById(updatedRecipe);
+	await db('recipes').where({ recipe_id }).update(updates);
+	return getById(recipe_id);
 }
 
 async function remove(recipe_id) {
